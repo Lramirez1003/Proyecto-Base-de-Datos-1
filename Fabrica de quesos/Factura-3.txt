@@ -1,0 +1,18 @@
+****************************
+     Fabrica de quesos     
+          La Habana        
+****************************
+Fecha:21/07/2021 Time:08:13
+Fact#:F-3
+Cliente:aaa
+----------------------------
+Producto                   
+Codigo  Descripcion     Precio
+Q-5	Cilindro	58.12389
+Q-5	Cilindro Hueco	   58.12389
+----------------------------
+Monto: 58.12389
+ITBIS: 10.462300186157226
+Total a pagar: 68.58619010925293
+----------------------------
+     Gracias por su compra!
