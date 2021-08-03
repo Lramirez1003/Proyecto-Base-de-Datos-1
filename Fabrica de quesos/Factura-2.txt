@@ -1,0 +1,16 @@
+****************************
+     Fabrica de quesos     
+          La Habana        
+****************************
+Fecha:03/08/2021 Time:15:22
+Fact#:F-2
+Cliente:Luis Prueba
+----------------------------
+Producto                   
+Codigo  Descripcion     Precio
+----------------------------
+Monto: 0.0
+ITBIS: 0.0
+Total a pagar: 0.0
+----------------------------
+     Gracias por su compra!

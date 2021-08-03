@@ -51,7 +51,9 @@ public class RegistrarQueso extends JDialog {
 			e.printStackTrace();
 		}
 		test_conexion();
+		//System.out.println(QuesoID1());
 	}
+	
 
 	public static  void test_conexion() {
 		if (connect !=null)
@@ -107,7 +109,7 @@ public class RegistrarQueso extends JDialog {
 		txtid.setBounds(95, 13, 139, 20);
 		panel.add(txtid);
 		txtid.setColumns(10);
-		txtid.setText("Q-"+(Fabrica.getInstance().getCodQueso()));
+		txtid.setText("Q-"+QuesoID());
 		Fabrica.getInstance().aumentar();;
 		
 		JPanel panel_Esfera = new JPanel();
@@ -337,9 +339,30 @@ public class RegistrarQueso extends JDialog {
 			}
 		}
 	}
+	private int QuesoID() {
+		int ids = 0;
+		String quesosql = "Select COUNT(queso_id) from queso";
+
+		try {
+			Statement read = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+					  ResultSet.CONCUR_READ_ONLY);
+			ResultSet resultado = read.executeQuery("Select COUNT(queso_id) from queso");
+			
+			resultado.next();
+			ids = resultado.getInt(1);
+		    
+			} catch (Exception e1) {
+		//todo: handle exception
+		}
+		
+		return ids+1;
+	}
+
 	private void clean() {
 		
 		txtid.setText("Q-"+(Fabrica.getInstance().getCodQueso()));
 		Fabrica.getInstance().aumentar();
 	}
+	
+	
 }

@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Logico.Cliente;
+import Logico.Conexion;
 import Logico.Fabrica;
 import Logico.Factura;
 
@@ -35,6 +39,9 @@ public class ListFacturas extends JDialog {
 	private static Object[] fila;
 	private static DefaultTableModel tableModel;
 	private int code;
+	
+	static Conexion link = new Conexion();
+	static Connection connect = link.getConexion();
 
 
 
@@ -103,12 +110,19 @@ public class ListFacturas extends JDialog {
 		fila = new Object[tableModel.getColumnCount()];
 		switch (selection) {
 		case 0:
-			for (Factura aux : Fabrica.getInstance().getMisFacturas()) {
-				fila[0] = aux.getId();
-				fila[1] = aux.getMiCliente().getNombre();
-				fila[2] = aux.totalFactura();
+			try {
+				Statement read = connect.createStatement();
+				ResultSet resultado = read.executeQuery("Select Factura_id,Nombre,Monto from Factura,Cliente where cliente.Cliente_id=Factura.Cliente_id");
 				
-				tableModel.addRow(fila);
+				while (resultado.next()) {
+					fila[0] = resultado.getString(1);
+					fila[1] = resultado.getString(2);
+					fila[2] = resultado.getString(3);
+					tableModel.addRow(fila);
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 
 		table.setModel(tableModel);

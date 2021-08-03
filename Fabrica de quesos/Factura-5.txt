@@ -2,16 +2,15 @@
      Fabrica de quesos     
           La Habana        
 ****************************
-Fecha:21/07/2021 Time:08:29
+Fecha:03/08/2021 Time:16:31
 Fact#:F-5
-Cliente:Luis
+Cliente:aaaa
 ----------------------------
 Producto                   
 Codigo  Descripcion     Precio
-Q-3	Esfera		38803.387
 ----------------------------
-Monto: 38803.387
-ITBIS: 6984.609609374999
-Total a pagar: 45787.996328125
+Monto: 0.0
+ITBIS: 0.0
+Total a pagar: 0.0
 ----------------------------
      Gracias por su compra!
