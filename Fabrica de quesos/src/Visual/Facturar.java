@@ -327,40 +327,50 @@ public class Facturar extends JDialog {
 									String cod = listCarrito.getItem(i).substring(0, pos);
 									
 									String quesosql = "Select queso_id from Queso where queso_id ='"+cod+"'";
-
+									
 									try {
 										Statement read = connect.createStatement();
 										ResultSet resultado = read.executeQuery(quesosql);
 										
 										while(resultado.next() ) {
 											misquesos.add(listCarrito.getItem(i));
+											PreparedStatement EliminarQueso = connect.prepareStatement("DELETE from queso where queso_id in (SELECT queso_id from queso where queso_id='"+cod+"')");
+											EliminarQueso.executeUpdate();
+											
+											PreparedStatement InsertarFact_Queso = connect.prepareStatement("INSERT INTO queso_factura (queso_id,Factura_id) VALUES (?,?)");
+											InsertarFact_Queso.setString(1,resultado.getString(1));
+											InsertarFact_Queso.setString(2,"F-"+FacturaID());
+								        	InsertarFact_Queso.executeUpdate();
 										}
-										} catch (Exception e1) {
-									//todo: handle exception
+											
+										} catch (Exception e2) {
+											JOptionPane.showMessageDialog(null,e2+"e2", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 									}
 									
-									//Queso queso = Fabrica.getInstance().buscarQuesoByID(cod);
+									
 									
 									listCarrito.clear();
-									//Fabrica.getInstance().getMisQuesos().remove(posicionQueso(queso));
 									
+								
 									
 								}
 								
 								try {
+									
+									
 						        	PreparedStatement InsertarFact = connect.prepareStatement("INSERT INTO Factura (Factura_id,Cliente_id,Monto,Fecha) VALUES (?,?,?,?)");
 						        	InsertarFact.setString(1,"F-"+FacturaID());
 						        	InsertarFact.setString(2,txtid.getText());
 						        	InsertarFact.setString(3,txttotal.getText());
 						        	InsertarFact.setString(4,dd.format(gg.getTime()));
-						        InsertarFact.executeUpdate();
+						        	InsertarFact.executeUpdate();
+						        	
 						        }
 						        catch (SQLException e1) {
 						        	///////
 						        }
 								
-								//Factura fact = new Factura(aux, "F-"+(Fabrica.getInstance().getMisFacturas().size()+1), misquesos);
-								//Fabrica.getInstance().getMisFacturas().add(fact);
+								
 								JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 								clean();
 							}
@@ -374,8 +384,8 @@ public class Facturar extends JDialog {
 								JOptionPane.showMessageDialog(null, "No se agregó ningún artículo al carrito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
 							}else {
-							//aux = new Cliente(txtNombre.getText(), txtDireccion.getText(), txtTelefono.getText(), txtid.getText());
-							//////////////////////////////////////////////////////////
+							
+							//Se introduce el cliente creado en la base de datos///
 					        try {
 					        	PreparedStatement InsertarCliente = connect.prepareStatement("INSERT INTO Cliente (Cliente_id,Nombre,Direccion,Telefono) VALUES (?,?,?,?)");
 					        InsertarCliente.setString(1,txtid.getText());
@@ -397,89 +407,89 @@ public class Facturar extends JDialog {
 								int pos = listCarrito.getItem(i).indexOf(" -");
 								String cod = listCarrito.getItem(i).substring(0, pos);
 								String quesosql = "Select queso_id,precio_unitario from Queso where queso_id ='"+cod+"'";
-
+								
 								try {
 									Statement read = connect.createStatement();
 									ResultSet resultado = read.executeQuery(quesosql);
 									
 									while(resultado.next() ) {
 										misquesos.add(listCarrito.getItem(i));
+										//BorraQueso(resultado.getString("queso_id"));
+										PreparedStatement EliminarQueso = connect.prepareStatement("DELETE from queso where queso_id in (SELECT queso_id from queso where queso_id='"+cod+"')");
+										EliminarQueso.executeUpdate();
+										
+										PreparedStatement InsertarFact_Queso = connect.prepareStatement("INSERT INTO queso_factura (queso_id,Factura_id) VALUES (?,?)");
+										InsertarFact_Queso.setString(1,resultado.getString(1));
+										InsertarFact_Queso.setString(2,"F-"+FacturaID());
+							        	InsertarFact_Queso.executeUpdate();
 									}
+									
+
 									} catch (Exception e1) {
-								//todo: handle exception
+										JOptionPane.showMessageDialog(null,e1+"ete", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
-								
 								listCarrito.remove(i);
-								
-								//Fabrica.getInstance().getMisQuesos().remove(posicionQueso(queso));
-								
-								//String borrarQueso = queso.getId();
-								
-								
+							
+	
 							}
-							//////////////////////////////////////////////////////////////////////////
+							// Se introduce factura dentro de la base de datos. //
 							
 							try {
+							
+								
 					        	PreparedStatement InsertarFact = connect.prepareStatement("INSERT INTO Factura (Factura_id,Cliente_id,Monto,Fecha) VALUES (?,?,?,?)");
-					        	InsertarFact.setNString(1,"F-"+FacturaID());
+					        	InsertarFact.setString(1,"F-"+FacturaID());
 					        	InsertarFact.setString(2,txtid.getText());
 					        	InsertarFact.setString(3,txttotal.getText());
 					        	InsertarFact.setString(4,dd.format(gg.getTime()));
-					        InsertarFact.executeUpdate();
+					        	InsertarFact.executeUpdate();
+
 					        }
 					        catch (SQLException e1) {
 					        	///////
 					        }
-							aux = new Cliente(txtNombre.getText(), txtDireccion.getText(), txtTelefono.getText(), txtid.getText());
-							Factura fact = new Factura(aux, "F-"+(Fabrica.getInstance().getMisFacturas().size()+1), misquesos2);
-							Fabrica.getInstance().getMisFacturas().add(fact);
+
 							listCarrito.removeAll();
 							JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 							clean();
-							String fac = new String();
-							for (Queso aux1: fact.getMisQuesos() ) {
-								if(aux1 instanceof Esfera) {
-									fac=  fac+aux1.getId()+"	Esfera		"+ (aux1.PrecioReal()+"")+"\n";
-								}
-								if(aux1 instanceof Cilindro ){
-									fac = fac+aux1.getId()+"	Cilindro	"+ (aux1.PrecioReal()+"")+"\n";
-								}if(aux1 instanceof CilindroHueco) {
-									fac = fac+aux1.getId()+"	Cilindro Hueco	   "+ (aux1.PrecioReal()+"")+"\n";
-								}
-									
-							}
 						
-								try {
-									 FileWriter factura = new FileWriter("Factura-"+Fabrica.getInstance().getMisFacturas().size()+".txt");
-									 factura.write(""
+								/*try {
+									String quesosql = "Select Factura_id,Nombre,Fecha,Monto from Factura,Cliente where factura.cliente_id=cliente.cliente_id ";
+									Statement readfact = connect.createStatement();
+									ResultSet rs1 = readfact.executeQuery(quesosql);
+										
+									
+									 FileWriter factura = new FileWriter("Factura-"+FacturaID()+".txt");
+									factura.write(""
 									 		+ "****************************\n"
 									 		+ "     Fabrica de quesos     \n"
 									 		+ "          La Habana        \n"
 									 		+ "****************************\n"
-									 		+ "Fecha:"+dd.format(gg.getTime()) + " Time:"+ddd.format(gg.getTime())+"\n"
-									 		+ "Fact#:"+fact.getId()+"\n"
-									 		+ "Cliente:"+fact.getMiCliente().getNombre()+"\n"
+									 		+ "Fecha:"+rs1.getString(3) + " Time:"+ddd.format(gg.getTime())+"\n"
+									 		+ "Fact#:"+rs1.getString(1)+"\n"
+									 		+ "Cliente:"+rs1.getString(2)+"\n"
 									 		+ "----------------------------\n"
 									 		+ "Producto                   \n"
 									 		+ "Codigo  Descripcion     Precio\n"
-									 		+ fac
+									 		+ "fac"
 									 		+ "----------------------------\n"
-									 		+ "Monto: "+ fact.totalFactura()+"\n"
-									 		+ "ITBIS: " + fact.totalFactura()*.18+"\n"
-									 		+ "Total a pagar: "+ (fact.totalFactura()*.18 + fact.totalFactura())+"\n"
+									 		+ "Monto: "+ rs1.getString(4)+"\n"
+									 		
+									 		+ "Total a pagar: "+ rs1.getString(4)+"\n"
 									 		+ "----------------------------\n"
 									 		+ "     Gracias por su compra!\n"
 									 		+ "");
 									 
 									 factura.close();
 									 
-							}catch(Exception ex) {ex.printStackTrace();}
-								
-							
+							}catch(Exception ex)
+								{
+								ex.printStackTrace();
+								}*/
+							}	
 						}
-						}
-					}}
-
+					}
+				}
 					private int posicionQueso(Queso queso) {
 						int aux = 0;
 						boolean encontrado = false;
@@ -494,6 +504,20 @@ public class Facturar extends JDialog {
 							return aux;
 				
 					}
+					
+					
+					private void BorraQueso(String cod) {
+						
+						
+						try {
+							PreparedStatement EliminarQueso = connect.prepareStatement("DELETE from queso where queso_id='"+cod+"'");
+							EliminarQueso.executeUpdate();
+							}catch(Exception e2) {
+									JOptionPane.showMessageDialog(null,e2 +"e2 ete", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+							}
+						
+					}
+					
 					
 					private int FacturaID() {
 						int ids = 0;
@@ -541,3 +565,21 @@ public class Facturar extends JDialog {
 	}			
 	
 }
+
+/*
+String fac = new String();
+String quesofacsql = "Select queso_id,tipo,precio_unitario from queso ";
+Statement read = connect.createStatement();
+ResultSet rs = read.executeQuery(quesofacsql);
+while (rs.next() ) {
+	String tipos=rs.getString(2);
+		if(tipos == "Esferico") {
+			fac=  fac+rs.getString(1)+rs.getString(2)+ rs.getString(3)+""+"\n";
+		}
+		if(tipos == "Cilindrico") {
+			fac=  fac+rs.getString(1)+rs.getString(2)+ rs.getString(3)+""+"\n";
+		}
+		if(tipos == "Cilindrico-Hueco") {
+			fac=  fac+rs.getString(1)+rs.getString(2)+ rs.getString(3)+""+"\n";
+		}
+					}*/

@@ -92,10 +92,10 @@ public class Log_In extends JFrame {
 	public static  void test_conexion() {
 		if (connect !=null)
 		{
-			System.out.println("Conectado | RegistrarQueso");
+			System.out.println("Conectado | Log-in");
 		}
 		else 
-			System.out.println("No conectado | RegistrarQueso");
+			System.out.println("No conectado | Log-in");
 	}
 
 	
