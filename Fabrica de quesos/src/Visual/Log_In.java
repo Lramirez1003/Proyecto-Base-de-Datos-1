@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Log_In extends JFrame {
 
@@ -39,6 +40,7 @@ public class Log_In extends JFrame {
 	private JTextField txtPass;
 	static Conexion link = new Conexion();
 	static Connection connect = link.getConexion();
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -136,7 +138,10 @@ public class Log_In extends JFrame {
 		panel.add(lblContrasea);
 		lblContrasea.setFont(new Font("Dubai Medium", Font.PLAIN, 16));
 		
-		txtPass = new JTextField();
+		//txtPass = new JTextField();
+		//txtPass.setBounds(62, 175, 183, 20);
+		//panel.add(txtPass);
+		txtPass = new JPasswordField();
 		txtPass.setBounds(62, 175, 183, 20);
 		panel.add(txtPass);
 		txtPass.setColumns(10);
@@ -154,6 +159,8 @@ public class Log_In extends JFrame {
 				}
 			}
 		});
+		
+		
 		btnLogin.setBounds(109, 206, 89, 23);
 		panel.add(btnLogin);
 		btnLogin.setBackground(SystemColor.controlHighlight);
