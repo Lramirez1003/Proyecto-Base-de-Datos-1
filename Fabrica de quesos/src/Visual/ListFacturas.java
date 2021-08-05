@@ -82,7 +82,7 @@ public class ListFacturas extends JDialog {
 			}
 		});
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"Código","Cliente", "Total"};
+		String[] columnNames = {"Código","Cliente", "Total","Fecha"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadSportMans(0);
 		scrollPane.setViewportView(table);
@@ -112,12 +112,13 @@ public class ListFacturas extends JDialog {
 		case 0:
 			try {
 				Statement read = connect.createStatement();
-				ResultSet resultado = read.executeQuery("Select Factura_id,Nombre,Monto from Factura,Cliente where cliente.Cliente_id=Factura.Cliente_id");
+				ResultSet resultado = read.executeQuery("Select Factura_id,Nombre,Monto,Fecha from Factura,Cliente where cliente.Cliente_id=Factura.Cliente_id");
 				
 				while (resultado.next()) {
 					fila[0] = resultado.getString(1);
 					fila[1] = resultado.getString(2);
 					fila[2] = resultado.getString(3);
+					fila[3] = resultado.getString(4);
 					tableModel.addRow(fila);
 				}
 				

@@ -251,12 +251,12 @@ public class RegistrarQueso extends JDialog {
 							aux = new Esfera(precioBase,precioUnitario,radio,id);	
 					        try {
 					        	PreparedStatement InsertarQueso = connect.prepareStatement("INSERT INTO queso (queso_id,precio_unitario,precio_base,radio,tipo) VALUES (?,?,?,?,?)");
-					        InsertarQueso.setString(1,txtid.getText());
-					        InsertarQueso.setString(2,spnunitario.getValue().toString());
-					        InsertarQueso.setString(3,spnBase.getValue().toString());
-					        InsertarQueso.setString(4,spnradioEsfera.getValue().toString());
-					        InsertarQueso.setString(5,"Esferico");
-					        InsertarQueso.executeUpdate();
+							        InsertarQueso.setString(1,txtid.getText());
+							        InsertarQueso.setString(2,spnunitario.getValue().toString());
+							        InsertarQueso.setString(3,spnBase.getValue().toString());
+							        InsertarQueso.setString(4,spnradioEsfera.getValue().toString());
+							        InsertarQueso.setString(5,"Esferico");
+							        InsertarQueso.executeUpdate();
 				        	JOptionPane.showMessageDialog(null, "Queso Agregado");
 					        }
 					        catch (SQLException e1) {

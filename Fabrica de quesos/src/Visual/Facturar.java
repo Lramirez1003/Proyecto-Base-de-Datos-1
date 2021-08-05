@@ -58,7 +58,7 @@ public class Facturar extends JDialog {
 	private JTextField txttotal;
 	private ArrayList desc= new ArrayList<>();
 	private static GregorianCalendar gg = new GregorianCalendar();
-	private static SimpleDateFormat dd = new SimpleDateFormat("dd/MM/YYYY");
+	private static SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat ddd = new SimpleDateFormat("HH:mm");
 	
 	 static Conexion link = new Conexion();
