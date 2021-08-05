@@ -51,7 +51,7 @@ public class ListFacturas extends JDialog {
 	 */
 	public ListFacturas() {
 		setTitle("Listado de Facturas");
-		setBounds(100, 100, 381, 376);
+		setBounds(100, 100, 445, 376);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,12 +60,12 @@ public class ListFacturas extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Listado de Facturas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 354, 293);
+		panel.setBounds(10, 11, 419, 293);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 23, 328, 259);
+		scrollPane.setBounds(10, 23, 399, 259);
 		panel.add(scrollPane);
 		
 		table = new JTable();
