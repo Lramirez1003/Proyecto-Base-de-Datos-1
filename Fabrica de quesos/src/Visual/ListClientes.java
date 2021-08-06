@@ -48,7 +48,7 @@ public class ListClientes extends JDialog {
 	 */
 	public ListClientes() {
 		setTitle("Listado de Clientes");
-		setBounds(100, 100, 596, 376);
+		setBounds(100, 100, 809, 376);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,12 +57,12 @@ public class ListClientes extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Listado de Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 571, 293);
+		panel.setBounds(10, 11, 783, 293);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 23, 548, 259);
+		scrollPane.setBounds(10, 23, 764, 259);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -80,7 +80,7 @@ public class ListClientes extends JDialog {
 			}
 		});
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"Código","Nombre", "Dirección", "Teléfono"};
+		String[] columnNames = {"Código","Nombre", "Dirección", "Teléfono", "País", "Ciudad"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadSportMans(0);
 		scrollPane.setViewportView(table);
@@ -117,6 +117,8 @@ public class ListClientes extends JDialog {
 					fila[1] = resultado.getString(2);
 					fila[2] = resultado.getString(3);
 					fila[3] = resultado.getString(4);
+					fila[4] = resultado.getString(5);
+					fila[5] = resultado.getString(6);
 					tableModel.addRow(fila);
 				}
 				
@@ -131,6 +133,7 @@ public class ListClientes extends JDialog {
 		columnModel.getColumn(1).setPreferredWidth(180);
 		columnModel.getColumn(2).setPreferredWidth(150);
 		columnModel.getColumn(3).setPreferredWidth(150);
+		columnModel.getColumn(4).setPreferredWidth(150);
 		
 		
 		

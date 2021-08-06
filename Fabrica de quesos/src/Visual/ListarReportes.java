@@ -56,7 +56,7 @@ public class ListarReportes extends JDialog {
 	public ListarReportes() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarReportes.class.getResource("/Auxiliares/quesito.png")));
 		setTitle("Lista de Reportes");
-		setBounds(100, 100, 453, 416);
+		setBounds(100, 100, 501, 416);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,12 +65,12 @@ public class ListarReportes extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lista de Reportes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 427, 311);
+		panel.setBounds(10, 11, 475, 311);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 54, 407, 246);
+		scrollPane.setBounds(10, 54, 455, 246);
 		panel.add(scrollPane);
 		
 		table = new JTable();

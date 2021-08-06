@@ -126,7 +126,7 @@ public class Facturar extends JDialog {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String codigo = txtid.getText();
-				String codsql = "Select Nombre,Direccion,Telefono from Cliente where Cliente_id ='"+codigo+"'";
+				String codsql = "Select Nombre,Direccion,Telefono,pais,ciudad from Cliente where Cliente_id ='"+codigo+"'";
 
 				try {
 					Statement read = connect.createStatement();
@@ -139,6 +139,10 @@ public class Facturar extends JDialog {
 						txtDireccion.setEditable(false);
 						txtTelefono.setText(resultado.getString(3));
 						txtTelefono.setEditable(false);
+						txtPais.setText(resultado.getString(4));
+						txtPais.setEditable(false);
+						txtCiudad.setText(resultado.getString(5));
+						txtCiudad.setEditable(false);
 						JOptionPane.showMessageDialog(null, "Cliente existente", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 					}
 					else {
@@ -146,6 +150,11 @@ public class Facturar extends JDialog {
 						txtDireccion.setEnabled(true);
 						txtNombre.setText("");
 						txtDireccion.setText("");
+						txtPais.setEnabled(true);
+						txtCiudad.setEnabled(true);
+						txtPais.setText("");
+						txtCiudad.setText("");
+						
 						JOptionPane.showMessageDialog(null, "Cliente no existe.\n Por favor ingrese los datos", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 					
 					}
@@ -409,11 +418,13 @@ public class Facturar extends JDialog {
 							
 							//Se introduce el cliente creado en la base de datos///
 					        try {
-					        	PreparedStatement InsertarCliente = connect.prepareStatement("INSERT INTO Cliente (Cliente_id,Nombre,Direccion,Telefono) VALUES (?,?,?,?)");
+					        	PreparedStatement InsertarCliente = connect.prepareStatement("INSERT INTO Cliente (Cliente_id,Nombre,Direccion,Telefono,pais,ciudad) VALUES (?,?,?,?,?,?)");
 					        InsertarCliente.setString(1,txtid.getText());
 					        InsertarCliente.setString(2,txtNombre.getText());
 					        InsertarCliente.setString(3,txtDireccion.getText());
 					        InsertarCliente.setString(4,txtTelefono.getText());
+					        InsertarCliente.setString(5,txtPais.getText());
+					        InsertarCliente.setString(6,txtCiudad.getText());
 					        InsertarCliente.executeUpdate();
 					        }
 					        catch (SQLException e1) {
@@ -564,6 +575,8 @@ public class Facturar extends JDialog {
 						txtDireccion.setText("");
 						txtNombre.setText("");
 						txtTelefono.setText("");
+						txtPais.setText("");
+						txtCiudad.setText("");
 						
 					}
 				});
