@@ -188,18 +188,6 @@ public class Principal extends JFrame {
 		});
 		mnFacturas.add(mntmReportes);
 		
-		JMenuItem mntmListar_2 = new JMenuItem("Listar");
-		mntmListar_2.setEnabled(false);
-		mntmListar_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ListFacturas list = new ListFacturas();
-				list.setLocationRelativeTo(null);
-				list.setModal(true);
-				list.setVisible(true);
-			}
-		});
-		mnFacturas.add(mntmListar_2);
-		
 		JMenu mnAdministrar = new JMenu("Administrar");
 		menuBar.add(mnAdministrar);
 		
