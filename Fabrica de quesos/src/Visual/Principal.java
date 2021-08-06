@@ -177,7 +177,19 @@ public class Principal extends JFrame {
 		});
 		mnFacturas.add(mntmFacturar);
 		
+		JMenuItem mntmReportes = new JMenuItem("Reportes");
+		mntmReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarReportes rep = new ListarReportes();
+				rep.setModal(true);
+				rep.setLocationRelativeTo(null);
+				rep.setVisible(true);
+			}
+		});
+		mnFacturas.add(mntmReportes);
+		
 		JMenuItem mntmListar_2 = new JMenuItem("Listar");
+		mntmListar_2.setEnabled(false);
 		mntmListar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListFacturas list = new ListFacturas();
@@ -187,6 +199,20 @@ public class Principal extends JFrame {
 			}
 		});
 		mnFacturas.add(mntmListar_2);
+		
+		JMenu mnAdministrar = new JMenu("Administrar");
+		menuBar.add(mnAdministrar);
+		
+		JMenuItem mntmInsertUser = new JMenuItem("A\u00F1adir usuario");
+		mntmInsertUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AgregarUser adduser = new AgregarUser();
+				adduser.setLocationRelativeTo(null);
+				adduser.setModal(true);
+				adduser.setVisible(true);
+			}
+		});
+		mnAdministrar.add(mntmInsertUser);
 		ImageIcon imagen = new ImageIcon("src/Auxiliares/Sin título-1.png");
 		
 		

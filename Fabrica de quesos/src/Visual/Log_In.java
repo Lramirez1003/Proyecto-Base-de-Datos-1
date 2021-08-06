@@ -149,14 +149,31 @@ public class Log_In extends JFrame {
 		JButton btnLogin = new JButton("Log-in");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtPass.getText().equalsIgnoreCase("Admin")&& txtUsuario.getText().equalsIgnoreCase("Admin")) {
-					Principal principal = new Principal();
-					principal.setVisible(true);
-					principal.setLocationRelativeTo(null);
-					dispose();	
-				}else {
-					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto/a", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+				
+				
+				try {
+					Statement read = connect.createStatement();
+					
+					String usuario = txtUsuario.getText();
+					String passwrd = txtPass.getText();
+					String consql = "Select usuario,passwrd from Usuario where usuario.usuario ='"+usuario+"'and usuario.passwrd= '"+passwrd+"'";
+					
+					ResultSet resultado = read.executeQuery(consql);
+					
+					if(resultado.next() ) {
+						Principal principal = new Principal();
+						principal.setVisible(true);
+						principal.setLocationRelativeTo(null);
+						dispose();	
+					}else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto/a", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, e1, "Notificación", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
 			}
 		});
 		

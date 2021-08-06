@@ -20,6 +20,7 @@ import Logico.Fabrica;
 import Logico.Factura;
 import Logico.Queso;
 
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -63,6 +64,8 @@ public class Facturar extends JDialog {
 	
 	 static Conexion link = new Conexion();
 	 static Connection connect = link.getConexion();
+	 private JTextField txtPais;
+	 private JTextField txtCiudad;
 
 	/**
 	 * Launch the application.
@@ -78,7 +81,6 @@ public class Facturar extends JDialog {
 		model1 = new DefaultListModel<String>();
 		model2 = new DefaultListModel<String>();
 		test_conexion();
-		//System.out.println(FacturaID());
 		
 	}
 	
@@ -98,7 +100,7 @@ public class Facturar extends JDialog {
 	public Facturar() throws ParseException {
 		setTitle("Facturar");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Facturar.class.getResource("/Auxiliares/receipt.png")));
-		setBounds(100, 100, 546, 407);
+		setBounds(100, 100, 547, 445);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -106,7 +108,7 @@ public class Facturar extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Buscar Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(4, 2, 521, 123);
+		panel.setBounds(4, 2, 521, 153);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -178,18 +180,38 @@ public class Facturar extends JDialog {
 		txtTelefono.setColumns(10);
 		
 		JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-		lblDireccin.setBounds(12, 88, 67, 14);
+		lblDireccin.setBounds(12, 125, 67, 14);
 		panel.add(lblDireccin);
 		
 		txtDireccion = new JTextField();
 		txtDireccion.setEnabled(false);
-		txtDireccion.setBounds(75, 85, 440, 20);
+		txtDireccion.setBounds(75, 122, 440, 20);
 		panel.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
+		txtPais = new JTextField();
+		txtPais.setEnabled(false);
+		txtPais.setColumns(10);
+		txtPais.setBounds(75, 84, 185, 20);
+		panel.add(txtPais);
+		
+		txtCiudad = new JTextField();
+		txtCiudad.setEnabled(false);
+		txtCiudad.setColumns(10);
+		txtCiudad.setBounds(324, 85, 185, 20);
+		panel.add(txtCiudad);
+		
+		JLabel lblPas = new JLabel("Pa\u00EDs:");
+		lblPas.setBounds(12, 89, 67, 14);
+		panel.add(lblPas);
+		
+		JLabel lblCiudad = new JLabel("Ciudad:");
+		lblCiudad.setBounds(270, 89, 67, 14);
+		panel.add(lblCiudad);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Factura", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(4, 128, 521, 196);
+		panel_1.setBounds(4, 166, 521, 196);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		

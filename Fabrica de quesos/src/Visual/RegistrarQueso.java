@@ -50,7 +50,7 @@ public class RegistrarQueso extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		test_conexion();
+		//test_conexion();
 		//System.out.println(QuesoID1());
 	}
 	
